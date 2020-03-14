@@ -20,6 +20,8 @@ ACID (Atomicity, Consistency, Isolation, and Durability) - acronym for safety gu
 
 #### Read Committed
 
+Read committed is a very popular isolation level. It is the default setting in Oracle 11g, PostgreSQL, SQL Server 2012, MemSQL, and many other databases
+
 It makes two guarantees:
  - When reading from the database, you will only see data that has been committed (no dirty reads).
  - When writing to the database, you will only overwrite data that has been committed (no dirty writes).
@@ -27,4 +29,15 @@ It makes two guarantees:
  *Dirty reads* - Imagine a transaction has written some data to the database, but the transaction has not yet committed or aborted. Can another transaction see that uncommitted data? If yes, that is called a dirty read.
 
 *Dirty writes* - For example, in car sales website on which two people, Alice and Bob, are simultaneously trying to buy the same car. Buying a car requires two database writes: the listing on the website needs to be updated to reflect the buyer, and the sales invoice needs to be sent to the buyer. In the case of Figure 7-5, the sale is awarded to Bob (because he performs the winning update to the listings table), but the invoice is sent to Alice (because she performs the winning update to the invoices table).
+
+##### Implementing read committed
+preventing *dirty writes* - most commonly, databases  by using row-level locks.
+# TODO preventing *dirty reads* - most databases prevent dirty reads using the approach illustrated in
+Figure 7-4: for every object that is written, the database remembers both the old com‐
+mitted value and the new value set by the transaction that currently holds the write
+lock. While the transaction is ongoing, any other transactions that read the object are
+simply given the old value. Only when the new value is committed do transactions
+switch over to reading the new value.
+
+
 
