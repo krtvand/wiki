@@ -15,3 +15,11 @@ ACID (Atomicity, Consistency, Isolation, and Durability) - acronym for safety gu
 *Isolation* - Concurrently running transactions shouldn’t interfere with each other. For example, if one transaction makes several writes, then another transaction should see either all or none of those writes, but not some subset.
 
 *Durability* - is the promise that once a transaction has committed successfully, any data it has written will not be forgotten, even if there is a hardware fault or the database crashes.
+
+### Isolation levels
+
+####Read Committed####
+
+It makes two guarantees:
+ - When reading from the database, you will only see data that has been committed (no dirty reads).
+ - When writing to the database, you will only overwrite data that has been committed (no dirty writes).
