@@ -53,8 +53,11 @@ example where principle violated:
 ```python
 class CoffeeMachine:
   def brewFilterCoffee():
+    raise NotImplemented(
   def brewEspresso():
+    raise NotImplemented(
   def addGroundCoffee():
+    raise NotImplemented(
   
 class BasicCoffeeMachine(CoffeeMachine):
   def brewEspresso():
