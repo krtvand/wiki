@@ -40,4 +40,34 @@ simply given the old value. Only when the new value is committed do transactions
 switch over to reading the new value.
 
 
+## SOLID principles
 
+### I - interface segregation. 
+
+Robert C. Martin defined as 
+> Clients should not be forced to depend upon interfaces that they do not use.
+
+detail explanation: https://stackify.com/interface-segregation-principle/
+
+example where principle violated:
+```python
+class CoffeeMachine:
+  def brewFilterCoffee():
+  def brewEspresso():
+  def addGroundCoffee():
+  
+class BasicCoffeeMachine(CoffeeMachine):
+  def brewEspresso():
+    raise NotAllowed()
+  def brewFilterCoffee():
+    do job
+    
+class EspressoCoffeeMachine(CoffeeMachine):
+  def brewEspresso():
+    do job
+    
+  def brewFilterCoffee():
+    raise NotAllowed()
+  
+```
+The problem is that the CoffeeMachine interface will change if the signature of the brewFilterCoffee method of the BasicCoffeeMachine method changes. That will also require a change in the EspressoMachine class and all other classes that use the EspressoMachine, even so, the brewFilterCoffee method doesn’t provide any functionality and they don’t call it.
